@@ -35,19 +35,90 @@
     };
 
     taps = [
-      #"homebrew/services"
-    ];
+#"atko-eng/private"
+"aws/aws"
+"cirruslabs/cli"
+"codecrafters-io/tap"
+"hmarr/tap"
+"mvndaemon/mvnd"
+"pirj/noclamshell"
+"sourcegraph/src-cli"
+"zkondor/dist"    
+];
 
     # `brew install`
     # TODO Feel free to add your favorite apps here.
     brews = [
       # "aria2"  # download tool
+"ansifilter"
+"atuin"
+"awscli"
+"awscli-local"
+"bash-completion"
+"bazelisk"
+"btop"
+"cirruslabs/cli/tart"
+"cmake"
+"codecrafters-io/tap/codecrafters"
+"coreutils"
+"cpanminus"
+"difftastic"
+"fastfetch"
+"fnm"
+"gh"
+"gnu-tar"
+"gnupg"
+"helm"
+"hmarr/tap/codeowners"
+"httpie"
+"k9s"
+"kubernetes-cli"
+"lima"
+"lnav"
+"make"
+"mtr"
+"nethack"
+"perl"
+"pinentry-mac"
+"pirj/noclamshell/noclamshell"
+"pre-commit"
+"python-packaging"
+#"python-yq" - yq conflict
+"shunit2"
+"sourcegraph/src-cli/src-cli"
+"sysbench"
+"terraform"
+"tldr"
+"watch"
+"zoxide"
     ];
 
     # `brew install --cask`
     # TODO Feel free to add your favorite apps here.
     casks = [
-      # "google-chrome"
+"alt-tab"
+"betterdisplay"
+"brave-browser"
+"chipmunk"
+"fastdmg"
+"hidock"
+"iina"
+"iterm2"
+"itsycal"
+"jetbrains-toolbox"
+"lens"
+"meetingbar"
+"raycast"
+"scroll-reverser"
+"shottr"
+"staruml"
+"stats"
+"visual-studio-code"
+"visual-studio-code@insiders"
+#"whatsapp" # - blocked in okta network
+"whisky"
+"zettlr"
+"znotch"      
     ];
   };
 }
