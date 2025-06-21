@@ -45,81 +45,86 @@
   # parameters in `outputs` are defined in `inputs` and can be referenced by their names.
   # However, `self` is an exception, this special parameter points to the `outputs` itself (self-reference)
   # The `@` syntax here is used to alias the attribute set of the inputs's parameter, making it convenient to use inside the function.
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    nix-darwin,
-    home-manager,
-    mac-app-util,
-    ...
-  }: let
-    vars = import ./variables.nix;
-    
-    username = vars.username;
-    useremail = vars.email;
-    system = vars.system; 
-    hostname = vars.hostname;
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nix-darwin,
+      home-manager,
+      mac-app-util,
+      ...
+    }:
+    let
+      vars = import ./variables.nix;
 
-    specialArgs =
-      inputs
-      // {
+      username = vars.username;
+      useremail = vars.email;
+      system = vars.system;
+      hostname = vars.hostname;
+
+      specialArgs = inputs // {
         inherit username useremail hostname;
       };
-  in {
-
-    defaultApp.aarch64-darwin = {
-      type = "app";
-      program = "${nix-darwin.packages.aarch64-darwin.default}/bin/darwin-rebuild";
-    };
-
-    darwinConfigurations = let
-      configs = ["personal" "work"];
     in
-      builtins.listToAttrs (map (name: {
-          name = name;
-          specialArgs = {inherit inputs;};
-          value = nix-darwin.lib.darwinSystem {
-            inherit system specialArgs;
-            modules = [
-              mac-app-util.darwinModules.default
-              home-manager.darwinModules.home-manager
-              ./configurations/${name}.nix
-              {
-                home-manager.sharedModules = [
-                  mac-app-util.homeManagerModules.default
-                ];
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = specialArgs;
-                home-manager.users.${username} = import ./home-manager-configs/${name}.nix;
-              }
-            ];
-          };
-        })
-        configs);
+    {
 
-    # d_arwinConfigurations."${hostname}" = darwin.lib.darwinSystem {
-    #   inherit system specialArgs;
-    #   modules = [
-    #     ./modules/nix-core.nix
-    #     ./modules/system.nix
-    #     ./modules/apps.nix
+      defaultApp.aarch64-darwin = {
+        type = "app";
+        program = "${nix-darwin.packages.aarch64-darwin.default}/bin/darwin-rebuild";
+      };
 
-    #     ./modules/host-users.nix
+      darwinConfigurations =
+        let
+          configs = [
+            "personal"
+            "work"
+          ];
+        in
+        builtins.listToAttrs (
+          map (name: {
+            name = name;
+            specialArgs = { inherit inputs; };
+            value = nix-darwin.lib.darwinSystem {
+              inherit system specialArgs;
+              modules = [
+                mac-app-util.darwinModules.default
+                home-manager.darwinModules.home-manager
+                ./configurations/${name}.nix
+                {
+                  home-manager.sharedModules = [
+                    mac-app-util.homeManagerModules.default
+                  ];
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.extraSpecialArgs = specialArgs;
+                  home-manager.users.${username} = import ./home-manager-configs/${name}.nix;
+                }
+              ];
+            };
+          }) configs
+        );
 
+      # d_arwinConfigurations."${hostname}" = darwin.lib.darwinSystem {
+      #   inherit system specialArgs;
+      #   modules = [
+      #     ./modules/nix-core.nix
+      #     ./modules/system.nix
+      #     ./modules/apps.nix
 
-    #     # home manager
-    #     home-manager.darwinModules.home-manager
-    #     {
-    #       home-manager.useGlobalPkgs = true;
-    #       home-manager.useUserPackages = true;
-    #       home-manager.extraSpecialArgs = specialArgs;
-    #       home-manager.users.${username} = import ./home;
-    #     }
-    #   ];
-    # };
+      #     ./modules/host-users.nix
 
-    # nix code formatter
-    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
-  };
+      #     # home manager
+      #     home-manager.darwinModules.home-manager
+      #     {
+      #       home-manager.useGlobalPkgs = true;
+      #       home-manager.useUserPackages = true;
+      #       home-manager.extraSpecialArgs = specialArgs;
+      #       home-manager.users.${username} = import ./home;
+      #     }
+      #   ];
+      # };
+
+      # nix code formatter
+      formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
+    };
 }

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -59,7 +60,7 @@
     #   GIT_CONFIG_WORK = "${config.home.homeDirectory}/work/.gitconfig";
     #   GIT_CONFIG_GLOBAL_WORK = "${config.home.homeDirectory}/.config/git/work/config";
     #   GIT_CONFIG_SYSTEM_WORK = "${config.home.homeDirectory}/.config/git/work/system";
-    #   GIT_CONFIG_GLOBAL_PERSONAL = "${config.home.homeDirectory}/.config/git/personal/config";  
+    #   GIT_CONFIG_GLOBAL_PERSONAL = "${config.home.homeDirectory}/.config/git/personal/config";
     # };
     # extraSessionFiles = [
     #   "${config.home.homeDirectory}/.config/zsh/aliases.zsh"
