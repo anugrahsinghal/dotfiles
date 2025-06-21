@@ -4,13 +4,11 @@
   ...
 }: {
   imports = [
-    ./modules/apps.nix
-    ./modules/host-users.nix
-    ./modules/nix-core.nix
-    ./modules/system.nix
+    ./modules/default.nix
   ];
 
+  # causes error - so remove for now
   # system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
-  # nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 }
