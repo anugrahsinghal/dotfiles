@@ -72,6 +72,23 @@
       ];
     };
 
+    fzf = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      # settings = {
+      #   keyBindings = {
+      #     ctrlT = "fzf-tmux";
+      #     ctrlR = "fzf-history";
+      #   };
+      #   fzfOptions = [
+      #     "--bind=ctrl-a:select-all"
+      #     "--bind=ctrl-d:toggle-preview"
+      #     "--preview-window=up:wrap"
+      #   ];
+      # };
+    };
+
     # terminal file manager
     # yazi = {
     #   enable = true;
