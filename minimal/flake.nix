@@ -50,11 +50,12 @@
     home-manager,
     ...
   }: let
-    # TODO replace with your own username, system and hostname
-    username = "anugrah.singhal";
-    useremail = "anugrah.singhal@okta.com";
-    system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
-    hostname = "F50DGCVW7C";
+    vars = import ./variables.nix;
+    
+    username = vars.username;
+    useremail = vars.email;
+    system = vars.system; 
+    hostname = vars.hostname;
 
     specialArgs =
       inputs
