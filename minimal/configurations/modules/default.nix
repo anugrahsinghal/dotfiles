@@ -1,7 +1,9 @@
-{ pkgs,
+{
+  pkgs,
   inputs,
-  ... 
-}: {
+  ...
+}:
+{
   # import sub modules
   imports = [
     ./apps.nix
