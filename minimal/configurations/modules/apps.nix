@@ -18,10 +18,7 @@
   #
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
-    # git - work needs homebrew git
-
     # essentials
-    
     comma
     jq
 
@@ -31,6 +28,9 @@
     cowsay
     tree
     spacer
+
+    # development tools
+    nixfmt-rfc-style
   ];
 
   # TODO To make this work, homebrew need to be installed manually, see https://brew.sh

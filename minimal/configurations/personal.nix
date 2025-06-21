@@ -6,4 +6,7 @@
   imports = [
     ./common.nix
   ];
+  environment.systemPackages = with pkgs; [
+    git
+  ];
 }
