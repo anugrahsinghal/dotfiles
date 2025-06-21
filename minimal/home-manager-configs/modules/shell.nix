@@ -5,8 +5,11 @@
     enableCompletion = true;
     initContent = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+
       source $HOME/.zshrc
-      
+
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+
       source $HOME/.atuin.zsh
       source "$HOME/.iterm2_shell_integration.zsh"
     '';
