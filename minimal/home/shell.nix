@@ -67,6 +67,7 @@
     # ];
   };
 
+  # to remove the this you can add a line in ~/.zshenv to `source ${dotDir}/.zshenv`
   # home.file.".zshenv".enable = false;
 
   home.shellAliases = {
