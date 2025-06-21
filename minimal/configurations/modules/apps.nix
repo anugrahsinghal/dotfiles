@@ -32,6 +32,7 @@
 
     # development tools
     nixfmt-rfc-style
+    nix-index
   ];
 
   # TODO To make this work, homebrew need to be installed manually, see https://brew.sh
