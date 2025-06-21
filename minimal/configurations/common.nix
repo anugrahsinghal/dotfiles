@@ -3,12 +3,11 @@
   inputs,
   ...
 }: {
-  imports = with pkgs; [
-    ./../modules/nix-core.nix
-    ./../modules/system.nix
-    ./../modules/apps.nix
-
-    ./../modules/host-users.nix
+  imports = [
+    ./modules/apps.nix
+    ./modules/host-users.nix
+    ./modules/nix-core.nix
+    ./modules/system.nix
   ];
 
   # system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
