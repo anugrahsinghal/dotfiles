@@ -18,7 +18,19 @@
   #
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
-    git
+    # git - work needs homebrew git
+
+    # essentials
+    
+    comma
+    jq
+
+    # extra tools
+    tldr
+    httpie
+    cowsay
+    tree
+    spacer
   ];
 
   # TODO To make this work, homebrew need to be installed manually, see https://brew.sh
@@ -51,7 +63,6 @@
     brews = [
       # "aria2"  # download tool
 "ansifilter"
-"atuin"
 "awscli"
 "awscli-local"
 "bash-completion"
@@ -70,7 +81,6 @@
 "gnupg"
 "helm"
 "hmarr/tap/codeowners"
-"httpie"
 "k9s"
 "kubernetes-cli"
 "lima"
@@ -88,9 +98,7 @@
 "sourcegraph/src-cli/src-cli"
 "sysbench"
 "terraform"
-"tldr"
 "watch"
-"zoxide"
     ];
 
     # `brew install --cask`
