@@ -101,7 +101,7 @@
         AppleShowAllFiles = true;
         AppleShowAllExtensions = true;
         FXDefaultSearchScope = "SCcf";
-        FXPreferredViewStyle = "clmv";
+        FXPreferredViewStyle = "Nlsv";
         QuitMenuItem = true;
         ShowPathbar = true;
         ShowStatusBar = true;
