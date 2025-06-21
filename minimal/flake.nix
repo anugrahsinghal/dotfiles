@@ -32,10 +32,12 @@
     };
 
     #nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
-    darwin = {
+    nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
+
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   # The `outputs` function will return all the build results of the flake.
@@ -46,8 +48,9 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    darwin,
+    nix-darwin,
     home-manager,
+    mac-app-util,
     ...
   }: let
     vars = import ./variables.nix;
@@ -63,26 +66,59 @@
         inherit username useremail hostname;
       };
   in {
-    darwinConfigurations."${hostname}" = darwin.lib.darwinSystem {
-      inherit system specialArgs;
-      modules = [
-        ./modules/nix-core.nix
-        ./modules/system.nix
-        ./modules/apps.nix
 
-        ./modules/host-users.nix
-
-
-        # home manager
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = specialArgs;
-          home-manager.users.${username} = import ./home;
-        }
-      ];
+    defaultApp.aarch64-darwin = {
+      type = "app";
+      program = "${nix-darwin.packages.aarch64-darwin.default}/bin/darwin-rebuild";
     };
+
+    darwinConfigurations = let
+      configs = ["personal" "work"];
+    in
+      builtins.listToAttrs (map (name: {
+          name = name;
+          specialArgs = {inherit inputs;};
+          value = nix-darwin.lib.darwinSystem {
+            inherit system specialArgs;
+            modules = [
+              mac-app-util.darwinModules.default
+              home-manager.darwinModules.home-manager
+              ./configurations/${name}.nix
+              {
+                home-manager.sharedModules = [
+                  mac-app-util.homeManagerModules.default
+                ];
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = specialArgs;
+                home-manager.users.${username} = import ./home-manager-configs/${name}.nix;
+              }
+            ];
+          };
+        })
+        configs);
+
+    # d_arwinConfigurations."${hostname}" = darwin.lib.darwinSystem {
+    #   inherit system specialArgs;
+    #   modules = [
+    #     ./modules/nix-core.nix
+    #     ./modules/system.nix
+    #     ./modules/apps.nix
+
+    #     ./modules/host-users.nix
+
+
+    #     # home manager
+    #     home-manager.darwinModules.home-manager
+    #     {
+    #       home-manager.useGlobalPkgs = true;
+    #       home-manager.useUserPackages = true;
+    #       home-manager.extraSpecialArgs = specialArgs;
+    #       home-manager.users.${username} = import ./home;
+    #     }
+    #   ];
+    # };
+
     # nix code formatter
     formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
   };
