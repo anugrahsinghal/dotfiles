@@ -38,6 +38,6 @@
     urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
     urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
 
-    home-manager-edit = "code ~/.config ~/.config/{flake,{configurations,homes}/{common,work}}.nix";
+    home-manager-edit = "code ~/.nix-config ~/.nix-config/{flake,{configurations,homes}/{common,work}}.nix";
   };
 }
