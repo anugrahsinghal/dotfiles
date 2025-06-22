@@ -43,7 +43,7 @@ home-manager-switch
 Your current nix-darwin configuration's structure should be as follows:
 
 ```bash
-anugrah.singhal@F50DGCVW7C:~/.nix-config/ > tree -a
+> tree -a
 .
 ├── assets
 │   └── common
