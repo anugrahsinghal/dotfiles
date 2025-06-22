@@ -104,26 +104,6 @@
           }) configs
         );
 
-      # d_arwinConfigurations."${hostname}" = darwin.lib.darwinSystem {
-      #   inherit system specialArgs;
-      #   modules = [
-      #     ./modules/nix-core.nix
-      #     ./modules/system.nix
-      #     ./modules/apps.nix
-
-      #     ./modules/host-users.nix
-
-      #     # home manager
-      #     home-manager.darwinModules.home-manager
-      #     {
-      #       home-manager.useGlobalPkgs = true;
-      #       home-manager.useUserPackages = true;
-      #       home-manager.extraSpecialArgs = specialArgs;
-      #       home-manager.users.${username} = import ./home;
-      #     }
-      #   ];
-      # };
-
       # nix code formatter
       formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
     };
