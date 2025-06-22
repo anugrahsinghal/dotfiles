@@ -59,7 +59,7 @@ Your current nix-darwin configuration's structure should be as follows:
 │   ├── common.nix		# common between personal and work
 │   ├── personal.nix	# personal specific config
 │   └── work.nix 		# work specific config
-├── home-manager-configs # a folder contains all your nix-darwin configuration files
+├── home-manager-configs # a folder contains all your home-manager configuration files
 │   ├── modules
 │   │   ├── default.nix		# imports all the configs below 
 │   │   ├── core.nix 		# programs managed by home-mananger + other settings
