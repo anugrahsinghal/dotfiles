@@ -14,7 +14,7 @@
   ];
 
   home.shellAliases = {
-    home-manager-switch = "cd ~/.config/minimal;git add .;sudo nix run . -- switch --flake .#work;cd -";
+    home-manager-switch = "cd ~/.config;git add .;sudo nix run . -- switch --flake .#work;cd -";
     rbrew = "/opt/homebrew/bin/brew"; # real brew to bypass ocm brew
   };
 
