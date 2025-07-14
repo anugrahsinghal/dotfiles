@@ -1,4 +1,4 @@
-# Nix Darwin
+# Nyx
 
 this is an amalgamation of
 - [alex's nix config](https://github.com/agonzalezro/.config)
